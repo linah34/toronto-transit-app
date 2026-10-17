@@ -1,3 +1,4 @@
+import PingButton from '../components/pingbutton'
 import '../index.css'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -24,6 +25,7 @@ function App() {
         <Button className='bg-white text-black hover:bg-amber-200'>+ ADD STOP</Button>
 
       </Card>
+      <PingButton />
     </div>
   )
 }

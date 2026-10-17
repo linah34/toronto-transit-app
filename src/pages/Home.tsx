@@ -24,16 +24,14 @@ function Home() {
         <div className='flex flex-col gap-4'>
           <div>
             <CardHeader className='text-white font-bold'>FROM</CardHeader>
-        <PlaceSearch placeholder="Search a place" onSelect={setPlace} />
-
-            <Input className='mx-1 outline-none bg-white p-2 text-black rounded-xl overflow-hidden' />
+            <PlaceSearch  placeholder="Search a place" onSelect={setPlace} />
           </div>
           <div>
             <CardHeader className='text-white font-bold'>TO</CardHeader>
-            <Input className='mx-1 outline-none bg-white p-2 text-black rounded-xl overflow-hidden' />
+            <PlaceSearch  placeholder="Search a place" onSelect={setPlace} />
           </div>
         </div>
-        <Button className='bg-white text-blue hover:bg-amber-200'>+ ADD STOP</Button>
+        <Button className='bg-white text-blue hover:bg-amber-200 rounded-2xl'>+ ADD STOP</Button>
 
       </Card>
       <PingButton />

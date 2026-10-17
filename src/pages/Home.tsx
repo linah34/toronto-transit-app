@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import {Card, CardHeader} from "@/components/ui/card"
 
 import Map from '../components/map.tsx'
-function App() {
+function Home() {
 
   return (
     <div>
@@ -28,4 +28,4 @@ function App() {
   )
 }
 
-export default App
+export default Home

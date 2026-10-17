@@ -9,8 +9,10 @@ function StopView() {
   return (
     <div>
         <div className='absolute inset-0 z-0'>
-                  <Map />
+          <div className='absolute inset-0 z-0'>
+                  <Map places={places} />
               </div>
+              
       <Card className="size-90 h-screen absolute p-5 bottom-0 bg-blue"> 
         <CardHeader className='text-white font-bold text-center text-2xl'>BUS NAME</CardHeader>
         <div className='flex flex-row gap-25 align-middle'>

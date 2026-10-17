@@ -6,6 +6,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img {
+  max-width: none !important;
+  max-height: none !important;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

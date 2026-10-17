@@ -4,6 +4,8 @@ import L from "leaflet";
 import { icon } from '@fortawesome/fontawesome-svg-core'
 import { faLocationPin } from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from "react";
+import StopsLayer from "./stopslayer";
+
 import type { Place } from "./placesearch";
 
 const pinSVG = icon(faLocationPin).html[0]
@@ -49,6 +51,7 @@ export default function TransitMap({places}: Props) {
       />
 
       <FitToPlaces places={places} />
+      <StopsLayer />
 
       {places.map((p, i) => (
         <Marker key={i} position={[p.lat, p.lng]} icon={pinIcon}>

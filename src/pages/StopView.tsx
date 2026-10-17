@@ -8,7 +8,7 @@ function StopView() {
   return (
     <div className='absolute inset-0 z-0 pointer-events-auto'>
       <Card className="size-90 h-screen absolute p-5 bottom-0 bg-blue"> 
-        <CardHeader className='text-white font-bold text-center text-2xl'>BUS NAME</CardHeader>
+        <CardHeader className='text-white text-center text-2xl'>BUS NAME</CardHeader>
         <div className='flex flex-row gap-25 align-middle'>
             <div className='flex flex-row gap-2'>
                 <FontAwesomeIcon icon={faUser}className='text-white' size='lg'/>

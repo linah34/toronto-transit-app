@@ -4,6 +4,8 @@ import L from "leaflet";
 import { useEffect } from "react";
 import type { Place } from "./PlaceSearch";
 
+import StopsLayer from "./stopslayer";
+
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -35,6 +37,7 @@ export default function TransitMap({ place }: { place: Place | null }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <FlyTo place={place} />
+      <StopsLayer />
       {place && (
         <Marker position={[place.lat, place.lng]}>
           <Popup>

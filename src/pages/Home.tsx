@@ -2,17 +2,15 @@ import PingButton from '../components/pingbutton'
 import '../index.css'
 import { Button } from "@/components/ui/button"
 import {Card, CardHeader} from "@/components/ui/card"
-
 import { useEffect, useState } from 'react'                     
 import { useOutletContext } from 'react-router-dom'             
 import type { MapContext } from '../layouts/maplayout.tsx'   
-
 import PlaceSearch, { type Place } from '../components/placesearch'                  
+import { getRoute } from '../lib/here' 
+
 type Stop = { id: string; place: Place | null }
-
-
 function Home() {
-  const { setPlaces } = useOutletContext<MapContext>()    
+  const { setPlaces, setRoute } = useOutletContext<MapContext>()    
 
   const [from, setFrom] = useState<Place | null>(null)
   const [to, setTo] = useState<Place | null>(null)
@@ -29,12 +27,22 @@ function Home() {
 
   useEffect(() => {
     const all = [from, ...stops.map(s => s.place), to].filter(
-      
       (p): p is Place => p !== null
     )
     setPlaces(all)
-  }, [from, to, stops, setPlaces])
 
+    if (all.length < 2)
+    {
+      setRoute([])
+      return
+    }
+
+    console.log('calling getRoute')
+    getRoute(all)
+    .then(r => { console.log('route result:', r); setRoute(r) })
+    .catch(e => console.error('getRoute failed:', e))
+    
+  }, [from, to, stops, setPlaces, setRoute])
   
   return (
     <>

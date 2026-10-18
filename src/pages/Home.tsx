@@ -11,7 +11,6 @@ import PlaceSearch, { type Place } from '../components/placesearch'
 type Stop = { id: string; place: Place | null }
 
 
-
 function Home() {
   const { setPlaces } = useOutletContext<MapContext>()    
 
@@ -30,6 +29,7 @@ function Home() {
 
   useEffect(() => {
     const all = [from, ...stops.map(s => s.place), to].filter(
+      
       (p): p is Place => p !== null
     )
     setPlaces(all)

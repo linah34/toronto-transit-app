@@ -66,10 +66,11 @@ export default function StopsLayer() {
           </div>
         </div>
       )}
-
-      {stops.map((stop) => (
+    
+      //temp fix; added i
+      {stops.map((stop, i) => (
         <CircleMarker
-          key={stop.id}
+            key={`${stop.id}-${i}`}  //changed for unique indexing
           center={[stop.lat, stop.lng]}
           radius={7}
           pathOptions={{ color: "#b91c1c", fillColor: "#ef4444", fillOpacity: 0.9 }}
@@ -81,7 +82,7 @@ export default function StopsLayer() {
               ? `Routes: ${stop.routes.join(", ")}`
               : "No route info"}
           </Popup>
-        </CircleMarker>
+         </CircleMarker>
       ))}
     </>
   );

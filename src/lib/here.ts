@@ -10,7 +10,8 @@ export type Leg = {
   coords: [number, number][]    
   departure?: string
   arrival?: string
-  minutes?: number              
+  minutes?: number 
+  delaySeconds?: number             
 }
 
 const MODES = 'subway,bus,lightRail'
@@ -20,12 +21,24 @@ async function routeBetween(a: Place, b: Place): Promise<Leg[]> {
     `https://transit.router.hereapi.com/v8/routes` +
     `?origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}` +
     `&modes=${MODES}` + 
-    `&return=polyline,travelSummary` +
+    `&return=polyline,travelSummary,incidents` +
     `&apiKey=${KEY}`
 
   const res = await fetch(url)
   if (!res.ok) throw new Error(`HERE error ${res.status}: ${await res.text()}`)
   const data = await res.json()
+
+  //temp
+  console.log('HERE raw response:', data)
+  console.table(
+    data.routes?.[0]?.sections.map((s: any) => ({
+      type: s.type,
+      mode: s.transport?.mode,
+      line: s.transport?.name,
+      departs: s.departure?.time,
+      depDelay: s.departure?.delay,
+    }))
+  )
 
   const route = data.routes?.[0]
   if (!route) return []
@@ -38,6 +51,7 @@ async function routeBetween(a: Place, b: Place): Promise<Leg[]> {
     departure: s.departure?.time,
     arrival: s.arrival?.time,
     minutes: s.travelSummary ? Math.round(s.travelSummary.duration / 60) : undefined,
+    delaySeconds: s.departure?.delay,  
   }))
 }
 

@@ -46,22 +46,21 @@ Deno.serve(async (req) => {
     if (!res.ok) return json({ error: "Transitland request failed" }, 502);
 
     const data = await res.json();
-    const stops = (data.stops ?? []).map((s: any) => {
-      const coords = s.geometry?.coordinates ?? []; // GeoJSON: [lng, lat]
-      const routes = new Set<string>();
-      for (const rs of s.route_stops ?? []) {
-        const name = rs.route?.route_short_name || rs.route?.route_long_name;
-        if (name) routes.add(name);
-      }
-      return {
-        id: s.onestop_id ?? s.id,
-        name: s.stop_name,
-        lat: coords[1],
-        lng: coords[0],
-        routes: [...routes],
-      };
-    }).filter((s: any) => typeof s.lat === "number" && typeof s.lng === "number");
-
+    const stops = (data.stops ?? [])
+      .map((s: any) => {
+        const coords = s.geometry?.coordinates ?? []; // GeoJSON: [lng, lat]
+        const feedId = s.feed_version?.feed?.onestop_id;
+        return {
+          id:
+            feedId && s.stop_id
+              ? `${feedId}:${s.stop_id}`
+              : s.onestop_id || String(s.id),
+          name: s.stop_name,
+          lat: coords[1],
+          lng: coords[0],
+        };
+      })
+      .filter((s: any) => typeof s.lat === "number" && typeof s.lng === "number");
     return json({ stops });
   } catch {
     return json({ error: "Bad request" }, 400);

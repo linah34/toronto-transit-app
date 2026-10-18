@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CircleMarker, Popup, useMap, useMapEvents } from "react-leaflet";
 import { supabase } from "../lib/supabase";
+import StopDepartures from "./StopDepartures";
 
 export type Stop = {
   id: string;
@@ -75,12 +76,16 @@ export default function StopsLayer() {
           radius={7}
           pathOptions={{ color: "#b91c1c", fillColor: "#ef4444", fillOpacity: 0.9 }}
         >
-          <Popup>
+          {/* <Popup>
             <strong>{stop.name}</strong>
             <br />
             {stop.routes?.length > 0
               ? `Routes: ${stop.routes.join(", ")}`
               : "No route info"}
+          </Popup> */}
+            <Popup minWidth={240}>
+            <strong>{stop.name}</strong>
+            <StopDepartures stopId={stop.id} />
           </Popup>
          </CircleMarker>
       ))}

@@ -39,6 +39,9 @@ html, body {
   --color-black: #211D16;
   --color-white: #EEF1DC;
   --color-blue: #56B6B2;
+  --color-yellow: #EFAE08;
+  --color-green: #A4C02F;
+  --color-orange: #DD760D;
   --body: system-ui, 'Arimo', Arimo, sans-serif;
 }
 

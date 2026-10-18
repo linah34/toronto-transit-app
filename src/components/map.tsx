@@ -64,11 +64,11 @@ export default function TransitMap({ places, route = [] }: Props) {
           positions={leg.coords}
           pathOptions={
             leg.mode === 'pedestrian'
-              ? { color: '#6b7280', weight: 4, dashArray: '6 8' }
+              ? { color: '#C86C0F', weight: 4, dashArray: '6 8' } //orange
               : leg.mode === 'subway'
-              ? { color: '#facc15', weight: 6 }
+              ? { color: '#8F9818', weight: 6 } //green
               : leg.mode === 'lightRail'
-              ? { color: '#16a34a', weight: 6 }
+              ? { color: '#D19800', weight: 6 } //yellow
               : { color: '#dc2626', weight: 6 }
           }
         />

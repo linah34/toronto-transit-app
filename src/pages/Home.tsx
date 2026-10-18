@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'             
 import type { MapContext } from '../layouts/maplayout.tsx'   
 
-import PlaceSearch, { type Place } from '../components/placesearch'
-
+import PlaceSearch, { type Place } from '../components/placesearch'                  
 type Stop = { id: string; place: Place | null }
+
+
 
 function Home() {
   const { setPlaces } = useOutletContext<MapContext>()    

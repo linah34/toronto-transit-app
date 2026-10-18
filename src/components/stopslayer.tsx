@@ -77,7 +77,7 @@ export default function StopsLayer() {
           <Popup>
             <strong>{stop.name}</strong>
             <br />
-            {stop.routes.length > 0
+            {stop.routes?.length > 0
               ? `Routes: ${stop.routes.join(", ")}`
               : "No route info"}
           </Popup>

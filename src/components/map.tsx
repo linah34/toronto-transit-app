@@ -1,10 +1,11 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { icon } from '@fortawesome/fontawesome-svg-core'
 import { faLocationPin } from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from "react";
 import StopsLayer from "./stopslayer";
+import type { Leg } from "../lib/here";     
 
 import type { Place } from "./placesearch";
 
@@ -34,11 +35,9 @@ function FitToPlaces({ places }: { places: Place[] }) {
   return null;
 }
 
-type Props = { places: Place[] }; 
+type Props = { places: Place[], route ?: Leg[]}; 
 
-
-
-export default function TransitMap({places}: Props) {
+export default function TransitMap({ places, route = [] }: Props) {
   return (
     <MapContainer
       center={[43.6532, -79.3832]} // Toronto
@@ -57,6 +56,22 @@ export default function TransitMap({places}: Props) {
         <Marker key={i} position={[p.lat, p.lng]} icon={pinIcon}>
           <Popup>{p.name}</Popup>
         </Marker>
+      ))}
+
+      {route.map((leg, i) => (
+        <Polyline
+          key={i}
+          positions={leg.coords}
+          pathOptions={
+            leg.mode === 'pedestrian'
+              ? { color: '#6b7280', weight: 4, dashArray: '6 8' }
+              : leg.mode === 'subway'
+              ? { color: '#facc15', weight: 6 }
+              : leg.mode === 'lightRail'
+              ? { color: '#16a34a', weight: 6 }
+              : { color: '#dc2626', weight: 6 }
+          }
+        />
       ))}
     </MapContainer>
   );
